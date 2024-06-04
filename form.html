@@ -1,209 +1,211 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Form Data Handling</title>
-        <meta charset="windows-1252">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <style>
-            .container {
-                overflow: hidden;
-            }
-            .tab {
-                float: left;
-            }
-            .tab-2 {
-                margin-left: 50px;
-            }
-            .tab-2 input {
-                display: block;
-                margin-bottom: 10px;
-            }
-            tr {
-                transition: all .25s ease-in-out;
-            }
-            tr:hover {
-                background-color: #EEE;
-                cursor: pointer;
-            }
-            .content-table {
-                border-collapse: collapse;
-                margin: 25px 0;
-                font-size: 0.9em;
-                min-width: 400px;
-                border-radius: 5px 5px 0 0;
-                overflow: hidden;
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-            }
-            .content-table thead tr {
-                background-color: #009879;
-                color: #ffffff;
-                text-align: left;
-                font-weight: bold;
-            }
-            .content-table th,
-            .content-table td {
-                padding: 12px 15px;
-            }
-            .content-table tbody tr {
-                border-bottom: 1px solid #dddddd;
-            }
-            .content-table tbody tr:nth-of-type(even) {
-                background-color: #f3f3f3;
-            }
-            .content-table tbody tr:last-of-type {
-                border-bottom: 2px solid #009879;
-            }
-            .content-table tbody tr.active-row {
-                font-weight: bold;
-                color: #f04545;
-            }
-        </style>
-        
-    </head>
-    <body>
-        
-        <div class="container">
-            <div class="tab tab-1">
-                <table id="table" class="content-table" border="1">
-                    <thead>
-                        <tr style="background: rgb(92, 107, 107); color: #fff;">
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Age</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="active-row">
-                            <td>Saumya</td>
-                            <td>Ranjan</td>
-                            <td>27</td>
-                            <td>
-                                <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
-                                <button onclick="removeSelectedRow(this)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John</td>
-                            <td>Peter</td>
-                            <td>30</td>
-                            <td>
-                                <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
-                                <button onclick="removeSelectedRow(this)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Arjun</td>
-                            <td>Nayar</td>
-                            <td>24</td>
-                            <td>
-                                <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
-                                <button onclick="removeSelectedRow(this)">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab tab-2">
-                First Name: <input type="text" name="fname" id="fname">
-                Last Name: <input type="text" name="lname" id="lname">
-                Age: <input type="number" name="age" id="age">
-                
-                <button onclick="addHtmlTableRow();">Add</button>
-                <button id="submitBtn" onclick="submitEdit()" style="display: none;">Submit</button>
-            </div>
+<head>
+    <title>Form Data Handling</title>
+    <meta charset="windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .container {
+            overflow: hidden;
+        }
+        .tab {
+            float: left;
+        }
+        .tab-2 {
+            margin-left: 50px;
+        }
+        .tab-2 input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        tr {
+            transition: all .25s ease-in-out;
+        }
+        tr:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            min-width: 400px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .content-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        .content-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #f04545;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="tab tab-1">
+            <table id="table" class="content-table" border="1">
+                <thead>
+                    <tr style="background: rgb(92, 107, 107); color: #fff;">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active-row">
+                        <td>Saumya</td>
+                        <td>Ranjan</td>
+                        <td>27</td>
+                        <td>
+                            <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
+                            <button onclick="removeSelectedRow(this)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>John</td>
+                        <td>Peter</td>
+                        <td>30</td>
+                        <td>
+                            <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
+                            <button onclick="removeSelectedRow(this)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Arjun</td>
+                        <td>Nayar</td>
+                        <td>24</td>
+                        <td>
+                            <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
+                            <button onclick="removeSelectedRow(this)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        
-        <script>
-            var rIndex,
-                table = document.getElementById("table");
-            
-            function checkEmptyInput() {
-                var isEmpty = false,
+        <div class="tab tab-2">
+            First Name: <input type="text" name="fname" id="fname">
+            Last Name: <input type="text" name="lname" id="lname">
+            Age: <input type="number" name="age" id="age">
+
+            <button id="addBtn" onclick="addHtmlTableRow();">Add</button>
+            <button id="submitBtn" onclick="submitEdit()" style="display: none;">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        var rIndex,
+            table = document.getElementById("table");
+
+        function checkEmptyInput() {
+            var isEmpty = false,
+                fname = document.getElementById("fname").value,
+                lname = document.getElementById("lname").value,
+                age = document.getElementById("age").value;
+
+            if (fname === "") {
+                alert("First Name Cannot Be Empty");
+                isEmpty = true;
+            } else if (lname === "") {
+                alert("Last Name Cannot Be Empty");
+                isEmpty = true;
+            } else if (age === "") {
+                alert("Age Cannot Be Empty");
+                isEmpty = true;
+            }
+            return isEmpty;
+        }
+
+        // add Row
+        function addHtmlTableRow() {
+            if (!checkEmptyInput()) {
+                var newRow = table.insertRow(table.rows.length),
+                    cell1 = newRow.insertCell(0),
+                    cell2 = newRow.insertCell(1),
+                    cell3 = newRow.insertCell(2),
+                    cell4 = newRow.insertCell(3),
                     fname = document.getElementById("fname").value,
                     lname = document.getElementById("lname").value,
                     age = document.getElementById("age").value;
-            
-                if (fname === "") {
-                    alert("First Name Cannot Be Empty");
-                    isEmpty = true;
-                } else if (lname === "") {
-                    alert("Last Name Cannot Be Empty");
-                    isEmpty = true;
-                } else if (age === "") {
-                    alert("Age Cannot Be Empty");
-                    isEmpty = true;
-                }
-                return isEmpty;
-            }
-            
-            // add Row
-            function addHtmlTableRow() {
-                if (!checkEmptyInput()) {
-                    var newRow = table.insertRow(table.rows.length),
-                        cell1 = newRow.insertCell(0),
-                        cell2 = newRow.insertCell(1),
-                        cell3 = newRow.insertCell(2),
-                        cell4 = newRow.insertCell(3),
-                        fname = document.getElementById("fname").value,
-                        lname = document.getElementById("lname").value,
-                        age = document.getElementById("age").value;
-            
-                    cell1.innerHTML = fname;
-                    cell2.innerHTML = lname;
-                    cell3.innerHTML = age;
-                    cell4.innerHTML = `<button onclick="editHtmlTbleSelectedRow(this)">Edit</button> 
-                                        <button onclick="removeSelectedRow(this)">Delete</button>`;
-                    selectedRowToInput();
-                    clearInputs();
-                }
-            }
-            
-            // display selected row data into input text
-            function selectedRowToInput() {
-                for (var i = 1; i < table.rows.length; i++) {
-                    table.rows[i].onclick = function() {
-                        rIndex = this.rowIndex;
-                        document.getElementById("fname").value = this.cells[0].innerHTML;
-                        document.getElementById("lname").value = this.cells[1].innerHTML;
-                        document.getElementById("age").value = this.cells[2].innerHTML;
-                    };
-                }
-            }
-            selectedRowToInput();
-            
-            function editHtmlTbleSelectedRow(button) {
-                var row = button.parentNode.parentNode;
-                rIndex = row.rowIndex;
-                document.getElementById("fname").value = row.cells[0].innerHTML;
-                document.getElementById("lname").value = row.cells[1].innerHTML;
-                document.getElementById("age").value = row.cells[2].innerHTML;
-                document.getElementById("submitBtn").style.display = "inline";
-            }
-            
-            function submitEdit() {
-                if (!checkEmptyInput()) {
-                    table.rows[rIndex].cells[0].innerHTML = document.getElementById("fname").value;
-                    table.rows[rIndex].cells[1].innerHTML = document.getElementById("lname").value;
-                    table.rows[rIndex].cells[2].innerHTML = document.getElementById("age").value;
-                    document.getElementById("submitBtn").style.display = "none";
-                    clearInputs();
-                }
-            }
 
-            function removeSelectedRow(button) {
-                var row = button.parentNode.parentNode;
-                table.deleteRow(row.rowIndex);
+                cell1.innerHTML = fname;
+                cell2.innerHTML = lname;
+                cell3.innerHTML = age;
+                cell4.innerHTML = `<button onclick="editHtmlTbleSelectedRow(this)">Edit</button> 
+                                    <button onclick="removeSelectedRow(this)">Delete</button>`;
+                selectedRowToInput();
                 clearInputs();
             }
+        }
 
-            function clearInputs() {
-                document.getElementById("fname").value = "";
-                document.getElementById("lname").value = "";
-                document.getElementById("age").value = "";
+        // display selected row data into input text
+        function selectedRowToInput() {
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function() {
+                    rIndex = this.rowIndex;
+                    document.getElementById("fname").value = this.cells[0].innerHTML;
+                    document.getElementById("lname").value = this.cells[1].innerHTML;
+                    document.getElementById("age").value = this.cells[2].innerHTML;
+                };
             }
-        </script>
-        
-    </body>
+        }
+        selectedRowToInput();
+
+        function editHtmlTbleSelectedRow(button) {
+            var row = button.parentNode.parentNode;
+            rIndex = row.rowIndex;
+            document.getElementById("fname").value = row.cells[0].innerHTML;
+            document.getElementById("lname").value = row.cells[1].innerHTML;
+            document.getElementById("age").value = row.cells[2].innerHTML;
+            document.getElementById("submitBtn").style.display = "inline";
+            document.getElementById("addBtn").style.display = "none"; // Hide Add button
+        }
+
+        function submitEdit() {
+            if (!checkEmptyInput()) {
+                table.rows[rIndex].cells[0].innerHTML = document.getElementById("fname").value;
+                table.rows[rIndex].cells[1].innerHTML = document.getElementById("lname").value;
+                table.rows[rIndex].cells[2].innerHTML = document.getElementById("age").value;
+                document.getElementById("submitBtn").style.display = "none";
+                document.getElementById("addBtn").style.display = "inline"; // Show Add button
+                clearInputs();
+            }
+        }
+
+        function removeSelectedRow(button) {
+            var row = button.parentNode.parentNode;
+            table.deleteRow(row.rowIndex);
+            clearInputs();
+        }
+
+        function clearInputs() {
+            document.getElementById("fname").value = "";
+            document.getElementById("lname").value = "";
+            document.getElementById("age").value = "";
+        }
+    </script>
+
+</body>
 </html>
