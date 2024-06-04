@@ -75,33 +75,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="active-row">
-                        <td>Saumya</td>
-                        <td>Ranjan</td>
-                        <td>27</td>
-                        <td>
-                            <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
-                            <button onclick="removeSelectedRow(this)">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>John</td>
-                        <td>Peter</td>
-                        <td>30</td>
-                        <td>
-                            <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
-                            <button onclick="removeSelectedRow(this)">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Arjun</td>
-                        <td>Nayar</td>
-                        <td>24</td>
-                        <td>
-                            <button onclick="editHtmlTbleSelectedRow(this)">Edit</button>
-                            <button onclick="removeSelectedRow(this)">Delete</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -118,6 +91,8 @@
     <script>
         var rIndex,
             table = document.getElementById("table");
+
+        document.addEventListener("DOMContentLoaded", loadTableData);
 
         function checkEmptyInput() {
             var isEmpty = false,
@@ -138,7 +113,6 @@
             return isEmpty;
         }
 
-        // add Row
         function addHtmlTableRow() {
             if (!checkEmptyInput()) {
                 var newRow = table.insertRow(table.rows.length),
@@ -157,10 +131,10 @@
                                     <button onclick="removeSelectedRow(this)">Delete</button>`;
                 selectedRowToInput();
                 clearInputs();
+                saveTableData();
             }
         }
 
-        // display selected row data into input text
         function selectedRowToInput() {
             for (var i = 1; i < table.rows.length; i++) {
                 table.rows[i].onclick = function() {
@@ -180,7 +154,7 @@
             document.getElementById("lname").value = row.cells[1].innerHTML;
             document.getElementById("age").value = row.cells[2].innerHTML;
             document.getElementById("submitBtn").style.display = "inline";
-            document.getElementById("addBtn").style.display = "none"; // Hide Add button
+            document.getElementById("addBtn").style.display = "none";
         }
 
         function submitEdit() {
@@ -189,8 +163,9 @@
                 table.rows[rIndex].cells[1].innerHTML = document.getElementById("lname").value;
                 table.rows[rIndex].cells[2].innerHTML = document.getElementById("age").value;
                 document.getElementById("submitBtn").style.display = "none";
-                document.getElementById("addBtn").style.display = "inline"; // Show Add button
+                document.getElementById("addBtn").style.display = "inline";
                 clearInputs();
+                saveTableData();
             }
         }
 
@@ -198,12 +173,48 @@
             var row = button.parentNode.parentNode;
             table.deleteRow(row.rowIndex);
             clearInputs();
+            saveTableData();
         }
 
         function clearInputs() {
             document.getElementById("fname").value = "";
             document.getElementById("lname").value = "";
             document.getElementById("age").value = "";
+        }
+
+        function saveTableData() {
+            var tableData = [];
+            for (var i = 1; i < table.rows.length; i++) {
+                var row = table.rows[i],
+                    rowData = {
+                        fname: row.cells[0].innerHTML,
+                        lname: row.cells[1].innerHTML,
+                        age: row.cells[2].innerHTML
+                    };
+                tableData.push(rowData);
+            }
+            localStorage.setItem("tableData", JSON.stringify(tableData));
+        }
+
+        function loadTableData() {
+            var tableData = localStorage.getItem("tableData");
+            if (tableData) {
+                tableData = JSON.parse(tableData);
+                for (var i = 0; i < tableData.length; i++) {
+                    var newRow = table.insertRow(table.rows.length),
+                        cell1 = newRow.insertCell(0),
+                        cell2 = newRow.insertCell(1),
+                        cell3 = newRow.insertCell(2),
+                        cell4 = newRow.insertCell(3);
+
+                    cell1.innerHTML = tableData[i].fname;
+                    cell2.innerHTML = tableData[i].lname;
+                    cell3.innerHTML = tableData[i].age;
+                    cell4.innerHTML = `<button onclick="editHtmlTbleSelectedRow(this)">Edit</button> 
+                                        <button onclick="removeSelectedRow(this)">Delete</button>`;
+                }
+                selectedRowToInput();
+            }
         }
     </script>
 
